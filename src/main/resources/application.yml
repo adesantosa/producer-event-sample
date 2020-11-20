@@ -1,0 +1,18 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    stream:
+      function:
+        definition: produceCreatedUser
+      bindings:
+        produceCreatedUser-out-0:
+          destination: user_topic
+          producer:
+            use-native-encoding: true
+      kafka:
+        binder:
+          brokers: locahost:9092
+          auto-create-topics: false
+          auto-add-partitions: false
+
