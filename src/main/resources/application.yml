@@ -1,18 +1,17 @@
 spring:
-  main:
-    allow-bean-definition-overriding: true
+#  main:
+#    allow-bean-definition-overriding: true
   cloud:
     stream:
       function:
         definition: produceCreatedUser
+        bindings:
+          produceCreatedUser-out-0: 'produce-created-user'
       bindings:
-        produceCreatedUser-out-0:
-          destination: user_topic
-          producer:
-            use-native-encoding: true
+        produce-created-user:
+          destination: 'user-topic'
       kafka:
         binder:
-          brokers: locahost:9092
+          brokers: 'localhost:9092'
           auto-create-topics: false
           auto-add-partitions: false
-

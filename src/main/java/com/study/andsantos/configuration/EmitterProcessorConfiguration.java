@@ -1,23 +1,15 @@
 package com.study.andsantos.configuration;
 
-import com.study.andsantos.adapter.input.web.request.UserRequest;
-import com.study.andsantos.application.domain.User;
+import com.study.andsantos.adapter.output.event.producer.event.UserEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.EmitterProcessor;
-
-import java.util.function.Supplier;
 
 @Configuration
 public class EmitterProcessorConfiguration {
 
     @Bean
-    public Supplier<EmitterProcessor<UserRequest>> produceCreatedUser() {
-        return this::userRequestEmitterProcessor;
-    }
-
-    @Bean
-    public EmitterProcessor<UserRequest> userRequestEmitterProcessor() {
+    public EmitterProcessor<UserEvent> userRequestEmitterProcessor() {
         return EmitterProcessor.create();
     }
 }

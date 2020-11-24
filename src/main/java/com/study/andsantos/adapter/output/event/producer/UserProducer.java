@@ -1,6 +1,7 @@
 package com.study.andsantos.adapter.output.event.producer;
 
 import com.study.andsantos.adapter.input.web.request.UserRequest;
+import com.study.andsantos.adapter.output.event.producer.event.UserEvent;
 import com.study.andsantos.adapter.output.event.producer.mapper.UserProducerMapper;
 import com.study.andsantos.application.domain.User;
 import com.study.andsantos.application.port.output.ProduceUserPort;
@@ -18,7 +19,7 @@ import java.util.function.Supplier;
 public class UserProducer implements ProduceUserPort {
 
     private final UserProducerMapper userProducerMapper;
-    private final EmitterProcessor<UserRequest> queue;
+    private final EmitterProcessor<UserEvent> queue;
 
 
     @Override
@@ -27,6 +28,11 @@ public class UserProducer implements ProduceUserPort {
                 .map(userProducerMapper::toUser)
                 .doOnNext(queue::onNext)
                 .then();
+    }
+
+    @Bean
+    public Supplier<Flux<UserEvent>> produceCreatedUser() {
+        return () -> queue;
     }
 
 }
