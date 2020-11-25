@@ -11,8 +11,13 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.EmitterProcessor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.publisher.SignalType;
 
 import java.util.function.Supplier;
+import java.util.logging.Level;
+
+import static java.util.logging.Level.INFO;
+import static reactor.core.publisher.SignalType.ON_NEXT;
 
 @Component
 @RequiredArgsConstructor
@@ -25,6 +30,7 @@ public class UserProducer implements ProduceUserPort {
     @Override
     public Mono<Void> produce(User user) {
         return Mono.just(user)
+                .log("UserProducer", INFO, ON_NEXT)
                 .map(userProducerMapper::toUser)
                 .doOnNext(queue::onNext)
                 .then();
