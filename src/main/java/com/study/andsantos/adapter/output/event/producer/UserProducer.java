@@ -30,8 +30,8 @@ public class UserProducer implements ProduceUserPort {
     @Override
     public Mono<Void> produce(User user) {
         return Mono.just(user)
-                .log("UserProducer", INFO, ON_NEXT)
                 .map(userProducerMapper::toUser)
+                .log("UserProducer", INFO, ON_NEXT)
                 .doOnNext(queue::onNext)
                 .then();
     }

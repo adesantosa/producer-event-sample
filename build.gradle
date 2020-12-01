@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.6.RELEASE'
+	id 'org.springframework.boot' version '2.3.3.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 }
@@ -22,6 +22,8 @@ repositories {
 
 ext {
 	set('springCloudVersion', "Hoxton.SR8")
+	set('junitVersion', '5.7.0')
+	set("javaFakerVersion", "1.0.2")
 }
 
 dependencies {
@@ -31,8 +33,16 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation("com.github.javafaker:javafaker:$javaFakerVersion")
 	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation('org.springframework.cloud:spring-cloud-contract-wiremock')
+	testImplementation('org.springframework.cloud:spring-cloud-stream-test-support')
+	testAnnotationProcessor('org.projectlombok:lombok')
+	testCompileOnly('org.projectlombok:lombok')
+	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "$junitVersion"
 }
 
 dependencyManagement {
