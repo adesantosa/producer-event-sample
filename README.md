@@ -10,7 +10,7 @@ Spring-cloud-stream with Kafka and using JSON as a serializer and deserializer.
 ### Hexagonal Architecture
 In this application hexagonal architecture was used:
 
-![ScreenShot](images/hexa arch.png)
+![alt text](images/hexa_arch.png)
 
 
 ### Prerequisites
