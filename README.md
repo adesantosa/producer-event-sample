@@ -1,5 +1,5 @@
 # Spring Cloud Stream Function
-Example using spring-cloud-stream with Kafka and using JSON as a serializer and deserializer.
+Spring-cloud-stream with Kafka and using JSON as a serializer and deserializer.
 
 ### Frameworks
 - Spring / Netty / Kafka
