@@ -19,7 +19,7 @@ public class UserControllerTest extends IntegrationTest {
     private final UserProducer userProducer;
 
     @Test
-    public void shouldCallUserCreation() throws JSONException, InterruptedException {
+    public void shouldCallUserCreation() throws JSONException {
         //Arrange
         final var userId = System.currentTimeMillis();
         final var name = Faker.instance().funnyName().name();
@@ -27,7 +27,7 @@ public class UserControllerTest extends IntegrationTest {
         //Act
         callUserEndpoint(userId, name);
 
-        //Asert
+        //Assert
         userProducer.produceCreatedUser().get()
                 .map(this::assertCreatedUser) //expectOnNext
                 .subscribe() //VerifyComplete
