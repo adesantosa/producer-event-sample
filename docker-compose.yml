@@ -35,6 +35,15 @@ services:
       CONFLUENT_METRICS_ENABLE: 'true'
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
+  producer:
+    image: producer-event-sample:latest
+    hostname: producer
+    container_name: producer
+    depends_on:
+      - broker
+    ports:
+      - "8084:8080"
+
   schema-registry:
     image: confluentinc/cp-schema-registry:5.5.0
     hostname: schema-registry
